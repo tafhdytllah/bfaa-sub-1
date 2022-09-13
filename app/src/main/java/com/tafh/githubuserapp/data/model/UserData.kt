@@ -46,26 +46,26 @@ object UserData {
     )
 
     private val nameData = arrayOf(
-        "peter bell",
-        "alyssa andre",
-        "natércio castro",
-        "terrence king",
-        "william david",
-        "irene morales",
-        "stefan siebert",
-        "amy miller",
-        "noélie roux",
-        "enrique brewer",
-        "abssilão rodrigues",
-        "liam walters",
-        "nicole curtis",
-        "deolindo vieira",
-        "miguel sanz",
-        "karen stanley",
-        "tammy hayes",
-        "hector guerrero",
-        "julienne lelieveld",
-        "aurélien fontai"
+        "Peter Bell",
+        "Alyssa Andre",
+        "Natércio Castro",
+        "Terrence King",
+        "William David",
+        "Irene Morales",
+        "Stefan Siebert",
+        "Amy Miller",
+        "Noélie Roux",
+        "Enrique Brewer",
+        "Abssilão Rodrigues",
+        "Liam Walters",
+        "Nicole Curtis",
+        "Deolindo Vieira",
+        "Miguel Sanz",
+        "Karen Stanley",
+        "Tammy Hayes",
+        "Hector Guerrero",
+        "Julienne Lelieveld",
+        "Aurélien Fontai"
     )
 
     private val avatarData = intArrayOf(
