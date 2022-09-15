@@ -18,10 +18,10 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_item_avatar"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
@@ -29,8 +29,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ImageContrastCheck"
-            tools:srcCompat="@drawable/avatar1" />
+            tools:src="@drawable/user1"
+            tools:ignore="ImageContrastCheck"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_arrow_right"
