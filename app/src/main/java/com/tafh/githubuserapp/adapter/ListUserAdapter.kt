@@ -11,6 +11,12 @@ import com.tafh.githubuserapp.databinding.ItemRowUserBinding
 class ListUserAdapter(private val list: List<User>) :
     RecyclerView.Adapter<ListUserAdapter.ListUserViewHolder>() {
 
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
     inner class ListUserViewHolder(private val binding: ItemRowUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -28,6 +34,10 @@ class ListUserAdapter(private val list: List<User>) :
 
                 tvItemName.text = item.name
                 tvItemUsername.text = item.username
+
+                root.setOnClickListener {
+                    onItemClickCallback.onItemClicked(item)
+                }
 
             }
         }
@@ -47,5 +57,9 @@ class ListUserAdapter(private val list: List<User>) :
     }
 
     override fun getItemCount() = list.size
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: User)
+    }
 
 }
