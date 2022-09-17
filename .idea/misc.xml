@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/drawable/bg_follow.xml" value="0.2485" />
+        <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/drawable/bg_unfollow.xml" value="0.2485" />
+        <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/drawable/btn_shape_follow.xml" value="0.2485" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/drawable/ic_company.xml" value="0.2265" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/drawable/ic_location.xml" value="0.2265" />
+        <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/drawable/ic_share.xml" value="0.2485" />
+        <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/drawable/toggle_follow.xml" value="0.2485" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/layout/activity_splash.xml" value="0.11302083333333333" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
@@ -12,6 +17,7 @@
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/layout/fragment_list_user.xml" value="0.264" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/layout/item_row_user.xml" value="0.4" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/layout/item_user.xml" value="0.264" />
+        <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/menu/menu_main.xml" value="0.152" />
       </map>
     </option>
   </component>
