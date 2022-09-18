@@ -1,21 +1,20 @@
 package com.tafh.githubuserapp.view.fragment
 
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tafh.githubuserapp.R
 import com.tafh.githubuserapp.data.model.User
 import com.tafh.githubuserapp.databinding.FragmentDetailUserBinding
+import com.tafh.githubuserapp.view.activity.MainActivity
+
 
 class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
 
@@ -25,6 +24,10 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
     companion object {
         const val EXTRA_DATA = "extra_data"
     }
+
+    private lateinit var user: User
+    private var titleDetailUser = ""
+    private lateinit var actionBar: ActionBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +40,13 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setUiFromParcelable()
+
+        actionBar = (activity as MainActivity).supportActionBar!!
+        actionBar.apply {
+            title = titleDetailUser
+        }
 
         binding.apply {
             btnFollowDetailUser.setOnCheckedChangeListener { _,isChecked ->
@@ -59,13 +68,13 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
             }
         }
 
-        setHasOptionsMenu(true)
+        this.setHasOptionsMenu(true)
     }
 
     private fun setUiFromParcelable() {
         if (arguments != null) {
-            val user = arguments?.getParcelable<User>(EXTRA_DATA)!!
-
+            user = arguments?.getParcelable(EXTRA_DATA)!!
+            titleDetailUser = user.username
             binding.apply {
                 val imageUri = user.avatar
                 val packageName = requireContext().packageName
@@ -77,7 +86,6 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
                     .into(ivAvatarDetailUser)
 
                 tvNameDetailUser.text = user.name
-                tvUsernameDetailUser.text = user.username
                 tvRepositoryDetailUser.text = user.repository.toString()
                 tvFollowerDetailUser.text = user.follower.toString()
                 tvFollowingDetailUser.text = user.following.toString()
@@ -115,16 +123,20 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+        when (item.itemId) {
             R.id.action_share -> {
                 shareIntent()
                 return true
             }
-
             else -> {
-                super.onOptionsItemSelected(item)
+                return super.onOptionsItemSelected(item)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

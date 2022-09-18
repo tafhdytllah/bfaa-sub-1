@@ -1,22 +1,22 @@
 package com.tafh.githubuserapp.view.fragment
 
-import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.tafh.githubuserapp.R
 import com.tafh.githubuserapp.adapter.ListUserAdapter
-import com.tafh.githubuserapp.data.model.UserList
-import com.tafh.githubuserapp.data.model.User
 import com.tafh.githubuserapp.data.Utils
+import com.tafh.githubuserapp.data.model.User
+import com.tafh.githubuserapp.data.model.UserList
 import com.tafh.githubuserapp.databinding.FragmentListUserBinding
+import com.tafh.githubuserapp.view.activity.MainActivity
 import com.tafh.githubuserapp.view.fragment.DetailUserFragment.Companion.EXTRA_DATA
 
 
@@ -25,7 +25,9 @@ class ListUserFragment : Fragment(R.layout.fragment_list_user) {
     private var _binding: FragmentListUserBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var actionBar: ActionBar
     private var userList = listOf<User>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +40,11 @@ class ListUserFragment : Fragment(R.layout.fragment_list_user) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        actionBar = (activity as MainActivity).supportActionBar!!
+        actionBar.apply {
+            title = getString(R.string.title_list_user_fragment)
+        }
 
         getLocalData()
 

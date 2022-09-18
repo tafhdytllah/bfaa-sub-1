@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".view.fragment.DetailUserFragment">
-
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_avatar_detail_user"
@@ -20,66 +20,32 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/user1" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_name_detail_user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        style="@style/TextContent.Medium"
         android:layout_marginEnd="8dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto"
-        android:lines="1"
-        android:text="-"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:text="@string/empty_text"
         app:layout_constraintEnd_toStartOf="@+id/btn_follow_detail_user"
         app:layout_constraintStart_toStartOf="@+id/iv_avatar_detail_user"
         app:layout_constraintTop_toBottomOf="@+id/tv_company_detail_user"
         tools:text="Jake Warthon" />
 
-    <TextView
-        android:id="@+id/tv_username_detail_user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/nunito_sans_light"
-        android:lines="1"
-        android:text="-"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_name_detail_user"
-        app:layout_constraintStart_toStartOf="@+id/tv_name_detail_user"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_detail_user"
-        tools:text="jakeWarthon" />
-
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title_repository_detail_user"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
+        style="@style/TextContent.Medium"
         android:layout_marginStart="16dp"
-        android:fontFamily="@font/roboto"
-        android:text="Repository"
-        android:textColor="@color/black"
-        android:textSize="14sp"
+        android:text="@string/title_repository"
         app:layout_constraintBottom_toBottomOf="@+id/iv_avatar_detail_user"
         app:layout_constraintStart_toEndOf="@+id/iv_avatar_detail_user"
         app:layout_constraintTop_toTopOf="@+id/iv_avatar_detail_user"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_repository_detail_user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        style="@style/TextContent.Medium"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto"
-        android:lines="1"
-        android:text="-"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="14sp"
+        android:text="@string/empty_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title_repository_detail_user"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,31 +53,19 @@
         app:layout_constraintTop_toTopOf="@+id/tv_title_repository_detail_user"
         tools:text="8" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title_follower_detail_user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto"
-        android:text="Follower"
-        android:textColor="@color/black"
-        android:textSize="14sp"
+        style="@style/TextContent.Medium"
+        android:text="@string/title_follower"
         app:layout_constraintEnd_toEndOf="@+id/tv_title_repository_detail_user"
         app:layout_constraintStart_toStartOf="@+id/tv_title_repository_detail_user"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_repository_detail_user" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_follower_detail_user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto"
-        android:lines="1"
-        android:text="-"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="14sp"
+        style="@style/TextContent.Medium"
+        android:layout_marginStart="16dp"
+        android:text="@string/empty_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title_follower_detail_user"
         app:layout_constraintEnd_toEndOf="@+id/tv_repository_detail_user"
@@ -119,18 +73,21 @@
         app:layout_constraintTop_toTopOf="@+id/tv_title_follower_detail_user"
         tools:text="40" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title_following_detail_user"
+        style="@style/TextContent.Medium"
+        android:text="@string/title_following"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_follower_detail_user"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_follower_detail_user"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_follower_detail_user" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_following_detail_user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto"
-        android:lines="1"
-        android:text="-"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="14sp"
+        style="@style/TextContent.Medium"
+        android:layout_marginStart="16dp"
+        android:text="@string/empty_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title_following_detail_user"
         app:layout_constraintEnd_toEndOf="@+id/tv_follower_detail_user"
@@ -138,33 +95,12 @@
         app:layout_constraintTop_toTopOf="@+id/tv_title_following_detail_user"
         tools:text="30" />
 
-    <TextView
-        android:id="@+id/tv_title_following_detail_user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto"
-        android:text="Following"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_title_follower_detail_user"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_title_follower_detail_user"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_follower_detail_user" />
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_location_detail_user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        style="@style/TextContent.Medium"
         android:layout_marginTop="16dp"
         android:drawablePadding="4dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto"
-        android:lines="1"
-        android:text="-"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="14sp"
+        android:text="@string/empty_text"
         app:drawableStartCompat="@drawable/ic_location"
         app:layout_constraintEnd_toEndOf="@+id/tv_following_detail_user"
         app:layout_constraintStart_toStartOf="@+id/tv_title_following_detail_user"
@@ -173,17 +109,9 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_company_detail_user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        style="@style/TextContent.Medium"
         android:drawablePadding="4dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto"
-        android:lines="1"
-        android:text="-"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="14sp"
+        android:text="@string/empty_text"
         app:drawableStartCompat="@drawable/ic_company"
         app:layout_constraintEnd_toEndOf="@+id/tv_location_detail_user"
         app:layout_constraintStart_toStartOf="@+id/tv_location_detail_user"
@@ -194,15 +122,17 @@
         android:id="@+id/btn_follow_detail_user"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/bg_follow"
-        android:textOff="Follow"
         android:textAllCaps="false"
-        android:textOn="UnFollow"
         android:textColor="@color/white"
+        android:textOff="@string/toggle_follow"
+        android:textOn="@string/toggle_unfollow"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_username_detail_user"
         app:layout_constraintEnd_toEndOf="@+id/tv_company_detail_user"
-        app:layout_constraintTop_toTopOf="@+id/tv_name_detail_user" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_company_detail_user"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_detail_user" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"

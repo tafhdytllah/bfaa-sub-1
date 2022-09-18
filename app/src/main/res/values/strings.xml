@@ -1,5 +1,14 @@
 <resources>
-    <string name="app_name">GitHubUserApp</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Github User</string>
+    <string name="title_list_user_fragment">User Github</string>
+    <string name="title_detail_user_fragment">Detail User</string>
+    <string name="empty_text">-</string>
+    <string name="toggle_follow">Follow</string>
+    <string name="toggle_unfollow">UnFollow</string>
+    <string name="title_following">Following</string>
+    <string name="title_follower">Follower</string>
+    <string name="title_repository">Repository</string>
+    <string name="menu_share">Share</string>
+
 
 </resources>
