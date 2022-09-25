@@ -11,29 +11,25 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.tafh.githubuserapp.R
-import com.tafh.githubuserapp.adapter.ListUserAdapter
 import com.tafh.githubuserapp.data.Utils
-import com.tafh.githubuserapp.data.model.User
-import com.tafh.githubuserapp.data.model.UserList
-import com.tafh.githubuserapp.databinding.FragmentListUserBinding
+import com.tafh.githubuserapp.databinding.FragmentHomeBinding
 import com.tafh.githubuserapp.view.activity.MainActivity
-import com.tafh.githubuserapp.view.fragment.DetailUserFragment.Companion.EXTRA_DATA
 
 
-class ListUserFragment : Fragment(R.layout.fragment_list_user) {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private var _binding: FragmentListUserBinding? = null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var actionBar: ActionBar
-    private var userList = listOf<User>()
+//    private var userList = listOf<User>()
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentListUserBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -57,7 +53,7 @@ class ListUserFragment : Fragment(R.layout.fragment_list_user) {
         val jsonString = Utils().getJsonFromAssets(requireContext(), jsonfile)
 
         val gson = Gson()
-        userList = gson.fromJson(jsonString, UserList::class.java).users
+//        userList = gson.fromJson(jsonString, UserList::class.java).users
     }
 
     private fun listUserRecyclerView() {
@@ -68,25 +64,25 @@ class ListUserFragment : Fragment(R.layout.fragment_list_user) {
                 layoutManager = LinearLayoutManager(requireContext())
             }
 
-            val listUserAdapter = ListUserAdapter(userList)
-            adapter = listUserAdapter
+//            val listUserAdapter = ListUserAdapter(userList)
+//            adapter = listUserAdapter
 
-            listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: User) {
-                    val mDetailUserFragment = DetailUserFragment()
-                    val mBundle = Bundle()
-
-                    mBundle.putParcelable(EXTRA_DATA, data)
-                    mDetailUserFragment.arguments = mBundle
-
-                    val mFragmentManager = parentFragmentManager
-                    mFragmentManager.beginTransaction().apply {
-                        replace(R.id.frame_container, mDetailUserFragment, DetailUserFragment::class.java.simpleName )
-                        addToBackStack(null)
-                        commit()
-                    }
-                }
-            })
+//            listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
+//                override fun onItemClicked(data: User) {
+//                    val mDetailUserFragment = DetailUserFragment()
+//                    val mBundle = Bundle()
+//
+//                    mBundle.putParcelable(EXTRA_DATA, data)
+//                    mDetailUserFragment.arguments = mBundle
+//
+//                    val mFragmentManager = parentFragmentManager
+//                    mFragmentManager.beginTransaction().apply {
+//                        replace(R.id.frame_container, mDetailUserFragment, DetailUserFragment::class.java.simpleName )
+//                        addToBackStack(null)
+//                        commit()
+//                    }
+//                }
+//            })
 
         }
     }
