@@ -1,10 +1,10 @@
 package com.tafh.githubuserapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tafh.githubuserapp.api.RetrofitConfig
-import com.tafh.githubuserapp.api.response.DetailUserResponse
 import com.tafh.githubuserapp.api.response.SearchUserResponse
 import com.tafh.githubuserapp.data.model.UserItem
 import retrofit2.Call
@@ -19,6 +19,7 @@ class HomeViewModel : ViewModel(){
     companion object {
         private const val query ="Taufik Hidayatullah"
     }
+
 
     init {
         findUser()
@@ -36,6 +37,7 @@ class HomeViewModel : ViewModel(){
 
                 } else {
                     _searchUser.value = response.body()?.items
+                    Log.e("INFORMASI", searchUser.toString())
                 }
             }
 
@@ -44,5 +46,6 @@ class HomeViewModel : ViewModel(){
             }
 
         })
+
     }
 }
