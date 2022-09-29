@@ -32,9 +32,9 @@ class ListUserAdapter(private val list: List<UserItem>) :
                 tvItemName.text = item.login
                 tvItemUsername.text = item.htmlUrl
 
-                root.setOnClickListener {
-                    onItemClickCallback.onItemClicked(item)
-                }
+//                root.setOnClickListener {
+//                    onItemClickCallback.onItemClicked(item)
+//                }
 
             }
         }

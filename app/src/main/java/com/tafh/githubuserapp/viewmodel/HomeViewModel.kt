@@ -1,9 +1,6 @@
 package com.tafh.githubuserapp.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.tafh.githubuserapp.api.RetrofitConfig
 import com.tafh.githubuserapp.api.response.SearchUserResponse
 import com.tafh.githubuserapp.data.model.UserItem
@@ -13,21 +10,12 @@ import retrofit2.Response
 
 class HomeViewModel : ViewModel(){
 
-    private val _searchUser = MutableLiveData<List<UserItem>>()
-    val searchUser: LiveData<List<UserItem>> =_searchUser
+    private val _users = MutableLiveData<List<UserItem>>()
+    val users: LiveData<List<UserItem>> =_users
 
-    companion object {
-        private const val query ="Taufik Hidayatullah"
-    }
-
-
-    init {
-        findUser()
-    }
-
-    private fun findUser() {
+    fun querySearchUser(queryString: String) {
         val apiService = RetrofitConfig.getApiService()
-        val client = apiService.getSearchUser(query)
+        val client = apiService.getSearchUser(queryString)
         client.enqueue(object : Callback<SearchUserResponse> {
             override fun onResponse(
                 call: Call<SearchUserResponse>,
@@ -36,8 +24,7 @@ class HomeViewModel : ViewModel(){
                 if (!response.isSuccessful) {
 
                 } else {
-                    _searchUser.value = response.body()?.items
-                    Log.e("INFORMASI", searchUser.toString())
+                    _users.value = response.body()?.items
                 }
             }
 
@@ -48,4 +35,8 @@ class HomeViewModel : ViewModel(){
         })
 
     }
+
+
+
+
 }

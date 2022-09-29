@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tafh.githubuserapp.R
@@ -39,14 +42,41 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        actionBar = (activity as MainActivity).supportActionBar!!
-        actionBar.apply {
-            title = getString(R.string.title_list_user_fragment)
+        binding.toolbarHome.setNavigationOnClickListener {
+            it.findNavController().navigateUp()
         }
 
-        homeViewMode.searchUser.observe(viewLifecycleOwner) { user ->
-            binding.rvListUser.setHasFixedSize(true)
-            setUserRecyclerView(user)
+        binding.swSearchUser.apply {
+            isIconified = false
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+
+                    if (query != null && query.length >= 3) {
+                        binding.rvListUser.scrollToPosition(0)
+                        homeViewMode.querySearchUser(query)
+
+                        homeViewMode.users.observe(viewLifecycleOwner) { user ->
+                            binding.rvListUser.setHasFixedSize(true)
+                            setUserRecyclerView(user)
+                        }
+
+                        binding.rvListUser.clearFocus()
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "minimal 3 karakter",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    return true
+
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return true
+                }
+
+            })
         }
 
     }
