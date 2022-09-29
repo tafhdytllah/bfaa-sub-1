@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tafh.githubuserapp.R
-import com.tafh.githubuserapp.data.model.User
 import com.tafh.githubuserapp.databinding.FragmentDetailUserBinding
 import com.tafh.githubuserapp.view.activity.MainActivity
 
@@ -25,7 +24,7 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
         const val EXTRA_DATA = "extra_data"
     }
 
-    private lateinit var user: User
+//    private lateinit var user: User
     private var titleDetailUser = ""
     private lateinit var actionBar: ActionBar
 
@@ -41,7 +40,7 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUiFromParcelable()
+//        setUiFromParcelable()
 
         actionBar = (activity as MainActivity).supportActionBar!!
         actionBar.apply {
@@ -71,29 +70,29 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
         this.setHasOptionsMenu(true)
     }
 
-    private fun setUiFromParcelable() {
-        if (arguments != null) {
-            user = arguments?.getParcelable(EXTRA_DATA)!!
-            titleDetailUser = user.username
-            binding.apply {
-                val imageUri = user.avatar
-                val packageName = requireContext().packageName
-                val image = resources.getIdentifier(imageUri, null, packageName)
-                Glide.with(requireContext())
-                    .load(image)
-                    .circleCrop()
-                    .apply(RequestOptions().override(128, 128))
-                    .into(ivAvatarDetailUser)
-
-                tvNameDetailUser.text = user.name
-                tvRepositoryDetailUser.text = user.repository.toString()
-                tvFollowerDetailUser.text = user.follower.toString()
-                tvFollowingDetailUser.text = user.following.toString()
-                tvLocationDetailUser.text = user.location
-                tvCompanyDetailUser.text = user.company
-            }
-        }
-    }
+//    private fun setUiFromParcelable() {
+//        if (arguments != null) {
+//            user = arguments?.getParcelable(EXTRA_DATA)!!
+//            titleDetailUser = user.username
+//            binding.apply {
+//                val imageUri = user.avatar
+//                val packageName = requireContext().packageName
+//                val image = resources.getIdentifier(imageUri, null, packageName)
+//                Glide.with(requireContext())
+//                    .load(image)
+//                    .circleCrop()
+//                    .apply(RequestOptions().override(128, 128))
+//                    .into(ivAvatarDetailUser)
+//
+//                tvNameDetailUser.text = user.name
+//                tvRepositoryDetailUser.text = user.repository.toString()
+//                tvFollowerDetailUser.text = user.follower.toString()
+//                tvFollowingDetailUser.text = user.following.toString()
+//                tvLocationDetailUser.text = user.location
+//                tvCompanyDetailUser.text = user.company
+//            }
+//        }
+//    }
 
     private fun shareIntent() {
         try {
