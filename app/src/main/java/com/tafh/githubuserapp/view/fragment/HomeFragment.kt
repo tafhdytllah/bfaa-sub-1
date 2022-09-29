@@ -7,19 +7,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.tafh.githubuserapp.R
+import com.tafh.githubuserapp.api.RetrofitConfig
+import com.tafh.githubuserapp.api.response.DetailUserResponse
+import com.tafh.githubuserapp.api.response.SearchUserResponse
 import com.tafh.githubuserapp.data.Utils
+import com.tafh.githubuserapp.data.model.UserItem
 import com.tafh.githubuserapp.databinding.FragmentHomeBinding
 import com.tafh.githubuserapp.view.activity.MainActivity
+import com.tafh.githubuserapp.viewmodel.HomeViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val homeViewMode by viewModels<HomeViewModel>()
 
     private lateinit var actionBar: ActionBar
 //    private var userList = listOf<User>()
@@ -42,19 +53,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             title = getString(R.string.title_list_user_fragment)
         }
 
-        getLocalData()
+        homeViewMode.searchUser.observe(viewLifecycleOwner, { user ->
+            setUserData(user)
+        })
 
-        binding.rvListUser.setHasFixedSize(true)
-        listUserRecyclerView()
+
+
+
+//        binding.rvListUser.setHasFixedSize(true)
+//        listUserRecyclerView()
     }
 
-    private fun getLocalData() {
-        val jsonfile = "githubuser.json"
-        val jsonString = Utils().getJsonFromAssets(requireContext(), jsonfile)
-
-        val gson = Gson()
-//        userList = gson.fromJson(jsonString, UserList::class.java).users
+    private fun setUserData(user: List<UserItem>?) {
+        binding.tv1.text = user.toString()
     }
+
 
     private fun listUserRecyclerView() {
         binding.rvListUser.apply {
