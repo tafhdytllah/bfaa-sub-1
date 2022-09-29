@@ -60,6 +60,7 @@
         style="@style/TextContent.Medium"
         android:layout_marginTop="8dp"
         android:text="@string/empty_text"
+        android:ellipsize="start"
         app:layout_constraintBottom_toBottomOf="@+id/iv_item_avatar"
         app:layout_constraintEnd_toEndOf="@+id/tv_item_name"
         app:layout_constraintHorizontal_bias="0.0"
