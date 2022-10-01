@@ -17,11 +17,14 @@ import com.tafh.githubuserapp.R
 import com.tafh.githubuserapp.adapter.ListUserAdapter
 import com.tafh.githubuserapp.data.model.UserItem
 import com.tafh.githubuserapp.databinding.FragmentHomeBinding
-import com.tafh.githubuserapp.view.activity.MainActivity
 import com.tafh.githubuserapp.viewmodel.HomeViewModel
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
+
+    companion object {
+        private const val TAG = "HomeFragment"
+    }
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -45,6 +48,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.toolbarHome.setNavigationOnClickListener {
             it.findNavController().navigateUp()
         }
+
+        homeViewMode.isLoading.observe(viewLifecycleOwner, {
+            showLoading(it)
+        })
+
+        homeViewMode.isEmpty.observe(viewLifecycleOwner, {
+            showEmptyData(it)
+        })
 
         binding.swSearchUser.apply {
             isIconified = false
@@ -81,6 +92,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
+
     private fun setUserRecyclerView(user: List<UserItem>) {
         binding.rvListUser.apply {
             if (requireContext().resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -109,6 +121,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 //                }
 //            })
 
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBarHome.visibility = View.VISIBLE
+            binding.tvEmptySearch.visibility = View.GONE
+        } else {
+            binding.progressBarHome.visibility = View.GONE
+            binding.rvListUser.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showEmptyData(isEmpty: Boolean) {
+        if (isEmpty) {
+            binding.tvNofoundSearch.visibility = View.VISIBLE
+            binding.rvListUser.visibility = View.GONE
+        } else {
+            binding.tvNofoundSearch.visibility = View.GONE
         }
     }
 
