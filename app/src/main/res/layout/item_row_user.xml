@@ -45,10 +45,10 @@
         android:id="@+id/tv_item_name"
         style="@style/TextContent.Large"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/empty_text"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv_item_username"
+        app:layout_constraintBottom_toTopOf="@+id/tv_item_url"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toEndOf="@+id/iv_item_avatar"
         app:layout_constraintTop_toTopOf="@+id/iv_item_avatar"
@@ -56,7 +56,7 @@
         tools:text="Julienne Lelieveld" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_item_username"
+        android:id="@+id/tv_item_url"
         style="@style/TextContent.Medium"
         android:layout_marginTop="8dp"
         android:text="@string/empty_text"
@@ -66,7 +66,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tv_item_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_item_name"
-        tools:text="purpletiger354" />
+        tools:text="https://github.com/opoirion" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

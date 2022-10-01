@@ -18,7 +18,7 @@ interface ApiService {
      * List Follower : /users/{username}/followers
      * List Following : /users/{username}/following
      *
-     * my_token = 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
+     * my_token = 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
      */
 
     /**
@@ -28,7 +28,7 @@ interface ApiService {
      *
      */
     @GET("search/users")
-    @Headers("Authorization: Bearer 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")
+    @Headers("Authorization: Bearer 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")
     fun getSearchUser(
         @Query("q") q: String
     ): Call<SearchUserResponse>

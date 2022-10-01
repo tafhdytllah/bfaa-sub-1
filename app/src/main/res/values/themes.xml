@@ -47,5 +47,9 @@
 
         <item name="android:textColorHint">@color/grey_light</item>
     </style>
+    
+    <style name="ProgressBarBlue" parent="Theme.AppCompat">
+        <item name="colorAccent">#39A7FF</item>
+    </style>
 
 </resources>
