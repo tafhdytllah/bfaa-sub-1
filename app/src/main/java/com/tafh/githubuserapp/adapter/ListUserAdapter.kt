@@ -12,7 +12,7 @@ import com.tafh.githubuserapp.databinding.ItemRowUserBinding
 class ListUserAdapter(private val list: List<UserItem>) :
     RecyclerView.Adapter<ListUserAdapter.ListUserViewHolder>() {
 
-    private lateinit var onItemClickCallback: OnItemClickCallback
+    private var onItemClickCallback: OnItemClickCallback? = null
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
@@ -34,9 +34,9 @@ class ListUserAdapter(private val list: List<UserItem>) :
                 tvItemName.text = item.login
                 tvItemUrl.text = item.htmlUrl
 
-//                root.setOnClickListener {
-//                    onItemClickCallback.onItemClicked(item)
-//                }
+                root.setOnClickListener {
+                    onItemClickCallback?.onItemClicked(item)
+                }
 
             }
         }
