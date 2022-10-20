@@ -29,9 +29,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val homeViewMode by viewModels<HomeViewModel>()
+    private val homeViewModel by viewModels<HomeViewModel>()
 
     private lateinit var actionBar: ActionBar
+
+    private lateinit var userAdapter: ListUserAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,11 +51,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             it.findNavController().navigateUp()
         }
 
-        homeViewMode.isLoading.observe(viewLifecycleOwner, {
+        homeViewModel.isLoading.observe(viewLifecycleOwner, {
             showLoading(it)
         })
 
-        homeViewMode.isEmpty.observe(viewLifecycleOwner, {
+        homeViewModel.isEmpty.observe(viewLifecycleOwner, {
             showEmptyData(it)
         })
 
@@ -64,9 +66,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                     if (query != null && query.length >= 3) {
                         binding.rvListUser.scrollToPosition(0)
-                        homeViewMode.querySearchUser(query)
+                        homeViewModel.querySearchUser(query)
 
-                        homeViewMode.users.observe(viewLifecycleOwner) { user ->
+                        homeViewModel.users.observe(viewLifecycleOwner) { user ->
                             binding.rvListUser.setHasFixedSize(true)
                             setUserRecyclerView(user)
                         }
@@ -101,8 +103,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 layoutManager = LinearLayoutManager(requireContext())
             }
 
-            val userAdapter = ListUserAdapter(user)
+            userAdapter = ListUserAdapter(user)
             adapter = userAdapter
+
+            userAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: UserItem) {
+                    val actionToDetailUser = HomeFragmentDirections.actionHomeFragmentToDetailUserFragment(
+                        data.login
+                    )
+                    findNavController().navigate(actionToDetailUser)
+                }
+            })
 
 //            listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
 //                override fun onItemClicked(data: UserItem) {

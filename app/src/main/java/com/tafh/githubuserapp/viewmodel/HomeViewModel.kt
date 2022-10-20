@@ -44,7 +44,6 @@ class HomeViewModel : ViewModel(){
                         Log.e(TAG, "data kosong")
                     } else {
                         _users.value = data
-                        Log.e(TAG, "$data")
                     }
                 }
             }
