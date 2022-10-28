@@ -12,7 +12,7 @@ import retrofit2.Response
 class HomeViewModel : ViewModel(){
 
     private val _users = MutableLiveData<List<UserItem>>()
-    val users: LiveData<List<UserItem>> =_users
+    val users: LiveData<List<UserItem>> = _users
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -29,6 +29,7 @@ class HomeViewModel : ViewModel(){
         _isEmpty.value = false
         val apiService = RetrofitConfig.getApiService()
         val client = apiService.getSearchUser(queryString)
+
         client.enqueue(object : Callback<SearchUserResponse> {
             override fun onResponse(
                 call: Call<SearchUserResponse>,

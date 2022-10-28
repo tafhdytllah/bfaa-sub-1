@@ -1,6 +1,5 @@
 package com.tafh.githubuserapp.api.response
 
-
 import com.google.gson.annotations.SerializedName
 import com.tafh.githubuserapp.data.model.UserItem
 

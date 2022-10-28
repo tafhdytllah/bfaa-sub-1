@@ -11,8 +11,6 @@ import retrofit2.http.Query
 interface ApiService {
     /**
      *
-     *
-     *
      * Endpoint
      * List Follower :
      * List Following : /users/{username}/following
@@ -20,7 +18,6 @@ interface ApiService {
      */
 
     /**
-     *
      *
      * Base URL             : https://api.github.com
      *
@@ -31,7 +28,7 @@ interface ApiService {
      * List Following       : /users/{username}/following
      */
     @GET("search/users")
-    @Headers("Authorization: Bearer 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")
+    @Headers("Authorization: Bearer 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")
     fun getSearchUser(
         @Query("q") q: String
     ): Call<SearchUserResponse>
@@ -43,7 +40,7 @@ interface ApiService {
      *
      */
     @GET("users/{username}")
-    @Headers("Authorization: Bearer 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")
+    @Headers("Authorization: Bearer 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")
     fun getDetailUser(
         @Path("username") username: String
     ): Call<DetailUserResponse>

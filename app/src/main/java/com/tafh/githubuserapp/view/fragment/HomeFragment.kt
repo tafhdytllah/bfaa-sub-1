@@ -94,7 +94,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-
     private fun setUserRecyclerView(user: List<UserItem>) {
         binding.rvListUser.apply {
             if (requireContext().resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -114,23 +113,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     findNavController().navigate(actionToDetailUser)
                 }
             })
-
-//            listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
-//                override fun onItemClicked(data: UserItem) {
-//                    val mDetailUserFragment = DetailUserFragment()
-//                    val mBundle = Bundle()
-//
-//                    mBundle.putParcelable(EXTRA_DATA, data)
-//                    mDetailUserFragment.arguments = mBundle
-//
-//                    val mFragmentManager = parentFragmentManager
-//                    mFragmentManager.beginTransaction().apply {
-//                        replace(R.id.frame_container, mDetailUserFragment, DetailUserFragment::class.java.simpleName )
-//                        addToBackStack(null)
-//                        commit()
-//                    }
-//                }
-//            })
 
         }
     }
