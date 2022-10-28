@@ -7,15 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.tafh.githubuserapp.R
 import com.tafh.githubuserapp.databinding.FragmentDetailUserBinding
-import com.tafh.githubuserapp.view.activity.MainActivity
 import com.tafh.githubuserapp.viewmodel.DetailUserViewModel
 
 private const val TAG = "DetailUserFragment"
@@ -31,10 +28,6 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
         const val EXTRA_DATA = "extra_data"
     }
 
-//    private lateinit var user: User
-    private var titleDetailUser = ""
-    private lateinit var actionBar: ActionBar
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,19 +39,36 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        setUiFromParcelable()
+
         binding.toolbarDetail.apply {
             setNavigationOnClickListener {
                 it.findNavController().navigateUp()
             }
-            title = titleDetailUser
         }
 
         val username = DetailUserFragmentArgs.fromBundle(arguments as Bundle).usernameDetail
-
+        Log.d(TAG, "onViewCreated: $username")
         detailUserViewModel.getDetailUser(username)
 
+        detailUserViewModel.userDetail.observe(viewLifecycleOwner) { user ->
+            binding.apply {
+                toolbarDetail.title = user.login
 
+                Glide.with(requireContext())
+                    .load(user.avatarUrl)
+                    .circleCrop()
+                    .placeholder(R.drawable.img_github_logo)
+                    .into(ivAvatarDetailUser)
+
+                tvNameDetailUser.text = user.name
+                tvRepositoryDetailUser.text = user.repositories.toString()
+                tvFollowerDetailUser.text = user.followers.toString()
+                tvFollowingDetailUser.text = user.following.toString()
+                tvLocationDetailUser.text = user.location ?: "-"
+                tvCompanyDetailUser.text = user.company ?: "-"
+
+            }
+        }
 
         binding.apply {
             btnFollowDetailUser.setOnCheckedChangeListener { _,isChecked ->
@@ -82,30 +92,6 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
 
         this.setHasOptionsMenu(true)
     }
-
-//    private fun setUiFromParcelable() {
-//        if (arguments != null) {
-//            user = arguments?.getParcelable(EXTRA_DATA)!!
-//            titleDetailUser = user.username
-//            binding.apply {
-//                val imageUri = user.avatar
-//                val packageName = requireContext().packageName
-//                val image = resources.getIdentifier(imageUri, null, packageName)
-//                Glide.with(requireContext())
-//                    .load(image)
-//                    .circleCrop()
-//                    .apply(RequestOptions().override(128, 128))
-//                    .into(ivAvatarDetailUser)
-//
-//                tvNameDetailUser.text = user.name
-//                tvRepositoryDetailUser.text = user.repository.toString()
-//                tvFollowerDetailUser.text = user.follower.toString()
-//                tvFollowingDetailUser.text = user.following.toString()
-//                tvLocationDetailUser.text = user.location
-//                tvCompanyDetailUser.text = user.company
-//            }
-//        }
-//    }
 
     private fun shareIntent() {
         try {

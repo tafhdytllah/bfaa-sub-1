@@ -1,6 +1,5 @@
 package com.tafh.githubuserapp.api.response
 
-
 import com.google.gson.annotations.SerializedName
 
 data class DetailUserResponse(
@@ -11,6 +10,9 @@ data class DetailUserResponse(
     @SerializedName("avatar_url")
     val avatarUrl: String,
 
+    @SerializedName("public_repos")
+    val repositories: Int,
+
     @SerializedName("followers")
     val followers: Int,
 
@@ -18,10 +20,10 @@ data class DetailUserResponse(
     val following: Int,
 
     @SerializedName("company")
-    val company: String,
+    val company: String?,
 
     @SerializedName("location")
-    val location: String,
+    val location: String?,
 
     @SerializedName("name")
     val name: String

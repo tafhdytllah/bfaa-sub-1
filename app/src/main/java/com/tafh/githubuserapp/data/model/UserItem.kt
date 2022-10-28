@@ -1,6 +1,5 @@
 package com.tafh.githubuserapp.data.model
 
-
 import com.google.gson.annotations.SerializedName
 
 data class UserItem(
