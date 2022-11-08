@@ -22,9 +22,12 @@
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/layout/item_user.xml" value="0.264" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/GitHubUserApp/app/src/main/res/menu/menu_main.xml" value="0.152" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/bfaa-github-user-submission-1/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/dev/knowledge/android/fundamental/Submission/bfaa-github-user-submission-1/app/src/main/res/layout/fragment_detail_user.xml" value="0.2" />
+        <entry key="..\:/dev/knowledge/android/fundamental/Submission/bfaa-github-user-submission-1/app/src/main/res/layout/fragment_detail_user.xml" value="0.4" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/bfaa-github-user-submission-1/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/bfaa-github-user-submission-1/app/src/main/res/layout/fragment_home_user.xml" value="0.25416666666666665" />
+        <entry key="..\:/dev/knowledge/android/fundamental/Submission/bfaa-github-user-submission-1/app/src/main/res/layout/fragment_list_follower.xml" value="0.20854700854700856" />
+        <entry key="..\:/dev/knowledge/android/fundamental/Submission/bfaa-github-user-submission-1/app/src/main/res/layout/fragment_list_following.xml" value="0.197008547008547" />
+        <entry key="..\:/dev/knowledge/android/fundamental/Submission/bfaa-github-user-submission-1/app/src/main/res/layout/fragment_list_repository.xml" value="0.20854700854700856" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/bfaa-github-user-submission-1/app/src/main/res/layout/fragment_list_user.xml" value="0.25416666666666665" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/bfaa-github-user-submission-1/app/src/main/res/layout/item_row_user.xml" value="0.536" />
         <entry key="..\:/dev/knowledge/android/fundamental/Submission/bfaa-github-user-submission-1/app/src/main/res/menu/menu_main.xml" value="0.20854700854700856" />

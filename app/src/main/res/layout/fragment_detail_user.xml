@@ -29,12 +29,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:padding="4dp"
+        android:src="@drawable/img_github_logo"
         app:civ_border_color="@color/black"
         app:civ_border_width="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_detail"
-        tools:src="@drawable/user1"
-        android:src="@drawable/img_github_logo"/>
+        tools:src="@drawable/user1" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_name_detail_user"
@@ -88,6 +88,7 @@
         style="@style/TextContent.Medium"
         android:layout_width="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/empty_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title_repository_detail_user"
@@ -103,6 +104,7 @@
         style="@style/TextContent.Medium"
         android:layout_width="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/empty_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title_follower_detail_user"
@@ -118,6 +120,7 @@
         style="@style/TextContent.Medium"
         android:layout_width="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/empty_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title_following_detail_user"
@@ -145,6 +148,7 @@
         style="@style/TextContent.Medium"
         android:layout_width="0dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:drawablePadding="4dp"
         android:text="@string/empty_text"
         app:drawableStartCompat="@drawable/ic_company"
@@ -157,23 +161,35 @@
         android:id="@+id/btn_follow_detail_user"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/bg_follow"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textOff="@string/toggle_follow"
         android:textOn="@string/toggle_unfollow"
         android:textSize="11sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="@+id/tv_location_detail_user"
         app:layout_constraintTop_toTopOf="@+id/tv_name_detail_user"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
+        android:layout_marginTop="16dp"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_detail_user" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

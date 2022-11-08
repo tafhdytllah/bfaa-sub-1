@@ -1,7 +1,8 @@
 package com.tafh.githubuserapp.api
 
-import com.tafh.githubuserapp.api.response.DetailUserResponse
-import com.tafh.githubuserapp.api.response.SearchUserResponse
+import com.tafh.githubuserapp.api.response.UserResponse
+import com.tafh.githubuserapp.api.response.ListUsersResponse
+import com.tafh.githubuserapp.api.response.UserRepositoriesResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -10,40 +11,64 @@ import retrofit2.http.Query
 
 interface ApiService {
     /**
-     *
-     * Endpoint
-     * List Follower :
-     * List Following : /users/{username}/following
-     *
+     *  TASK :
+     *  1. Menampilkan fragment List Follower & List Following yang diambil dari API.
+     *  2. Menggunakan TabLayout, BottomNavigationView, atau yang lainnya sebagai navigasi antara halaman List Follower dan List Following.
+     *  3. Aplikasi bisa menjaga data yang sudah dimuat ketika terjadi pergantian orientasi dari portrait ke landscape atau sebaliknya.
+     *  4. Retrofit (ok)
+     *  5. Menerapkan Android Architecture Component (minimal ViewModel dan LiveData) dengan benar. (ok)
      */
 
     /**
      *
-     * Base URL             : https://api.github.com
-     *
+     * Base URL             : https://api.github.com/
      * Endpoint
-     * Search User by query : /search/users?q={username}
-     * Detail user          : /users/{username}
-     * List Follower        : /users/{username}/followers
-     * List Following       : /users/{username}/following
+     * Search users                    : search/users?q={username}
+     * Get a user                      : users/{username}
+     * List repositories for a user    : users/{username}/repos
+     * List followers of a user        : users/{username}/followers
+     * List the people a user follows  : users/{username}/following
+     *
      */
+
     @GET("search/users")
-    @Headers("Authorization: Bearer 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")
+    @Headers("Authorization: Bearer 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")
     fun getSearchUser(
         @Query("q") q: String
-    ): Call<SearchUserResponse>
+    ): Call<ListUsersResponse>
+
+    @GET("users/{username}")
+    @Headers("Authorization: Bearer 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")
+    fun getDetailUser(
+        @Path("username") username: String
+    ): Call<UserResponse>
+
+    @GET("users/{username}/repos")
+    @Headers("Authorization: Bearer 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")
+    fun getUserRepositories(
+        @Path("username") username: String
+    ): Call<UserRepositoriesResponse>
+
+    @GET("users/{username}/followers")
+    @Headers("Authorization: Bearer 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")
+    fun getUserFollowers(
+        @Path("username") username: String
+    ): Call<ListUsersResponse>
+
+    @GET("users/{username}/following")
+    @Headers("Authorization: Bearer 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")
+    fun getUserFollowing(
+        @Path("username") username: String
+    ): Call<ListUsersResponse>
+
 
     /**
      *
-     * Detail User
-     * Endpoint : /users/{username}
-     *
+    "name": "anime-movie-app"
+    "visibility": "public"
+    "language": "Kotlin"
+    "updated_at": "2021-10-16T16:10:57Z"
      */
-    @GET("users/{username}")
-    @Headers("Authorization: Bearer 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")
-    fun getDetailUser(
-        @Path("username") username: String
-    ): Call<DetailUserResponse>
 
 
 }

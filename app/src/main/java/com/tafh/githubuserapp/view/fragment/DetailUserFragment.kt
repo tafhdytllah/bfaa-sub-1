@@ -7,11 +7,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.tafh.githubuserapp.R
+import com.tafh.githubuserapp.adapter.SectionsPagerAdapter
 import com.tafh.githubuserapp.databinding.FragmentDetailUserBinding
 import com.tafh.githubuserapp.viewmodel.DetailUserViewModel
 
@@ -26,6 +32,8 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
 
     companion object {
         const val EXTRA_DATA = "extra_data"
+        @StringRes
+        private val TAB_TITLES = intArrayOf(R.string.tab_1, R.string.tab_2, R.string.tab_3)
     }
 
     override fun onCreateView(
@@ -60,7 +68,7 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
                     .placeholder(R.drawable.img_github_logo)
                     .into(ivAvatarDetailUser)
 
-                tvNameDetailUser.text = user.name
+                tvNameDetailUser.text = user.name ?: "-"
                 tvRepositoryDetailUser.text = user.repositories.toString()
                 tvFollowerDetailUser.text = user.followers.toString()
                 tvFollowingDetailUser.text = user.following.toString()
@@ -71,7 +79,7 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
         }
 
         binding.apply {
-            btnFollowDetailUser.setOnCheckedChangeListener { _,isChecked ->
+            btnFollowDetailUser.setOnCheckedChangeListener { _, isChecked ->
                 if (!isChecked) {
                     btnFollowDetailUser.isChecked = false
                     Toast.makeText(requireContext(), "Unfollow", Toast.LENGTH_SHORT).show()
@@ -89,6 +97,15 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
                 }
             }
         }
+
+        val sectionsPagerAdapter = SectionsPagerAdapter(activity as AppCompatActivity)
+        val viewPager: ViewPager2 = (activity as AppCompatActivity).findViewById(R.id.view_pager)
+        viewPager.adapter = sectionsPagerAdapter
+
+        val tabs: TabLayout = (activity as AppCompatActivity).findViewById(R.id.tab_layout)
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
 
         this.setHasOptionsMenu(true)
     }

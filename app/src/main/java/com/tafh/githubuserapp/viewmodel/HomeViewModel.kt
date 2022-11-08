@@ -3,7 +3,7 @@ package com.tafh.githubuserapp.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import com.tafh.githubuserapp.api.RetrofitConfig
-import com.tafh.githubuserapp.api.response.SearchUserResponse
+import com.tafh.githubuserapp.api.response.ListUsersResponse
 import com.tafh.githubuserapp.data.model.UserItem
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,10 +30,10 @@ class HomeViewModel : ViewModel(){
         val apiService = RetrofitConfig.getApiService()
         val client = apiService.getSearchUser(queryString)
 
-        client.enqueue(object : Callback<SearchUserResponse> {
+        client.enqueue(object : Callback<ListUsersResponse> {
             override fun onResponse(
-                call: Call<SearchUserResponse>,
-                response: Response<SearchUserResponse>
+                call: Call<ListUsersResponse>,
+                response: Response<ListUsersResponse>
             ) {
                 _isLoading.value = false
                 if (!response.isSuccessful) {
@@ -49,7 +49,7 @@ class HomeViewModel : ViewModel(){
                 }
             }
 
-            override fun onFailure(call: Call<SearchUserResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ListUsersResponse>, t: Throwable) {
                 _isLoading.value = false
                 _isEmpty.value = true
                 Log.e(TAG, "onFailure: ${t.message.toString()} gagal")

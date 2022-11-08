@@ -2,7 +2,7 @@ package com.tafh.githubuserapp.api.response
 
 import com.google.gson.annotations.SerializedName
 
-data class DetailUserResponse(
+data class UserResponse(
 
     @SerializedName("login")
     val login: String,
@@ -26,5 +26,5 @@ data class DetailUserResponse(
     val location: String?,
 
     @SerializedName("name")
-    val name: String
+    val name: String?
 )
