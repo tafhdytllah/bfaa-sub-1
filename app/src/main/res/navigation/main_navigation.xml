@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.tafh.githubuserapp.view.fragment.HomeFragment"
+        android:name="com.tafh.githubuserapp.ui.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailUserFragment"
-        android:name="com.tafh.githubuserapp.view.fragment.DetailUserFragment"
+        android:name="com.tafh.githubuserapp.ui.fragment.DetailUserFragment"
         android:label="fragment_detail_user"
         tools:layout="@layout/fragment_detail_user" >
         <argument

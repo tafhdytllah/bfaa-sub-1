@@ -1,4 +1,4 @@
-package com.tafh.githubuserapp.view.fragment
+package com.tafh.githubuserapp.ui.fragment
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,24 +13,18 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tafh.githubuserapp.R
-import com.tafh.githubuserapp.adapter.ListUserAdapter
-import com.tafh.githubuserapp.data.model.UserItem
+import com.tafh.githubuserapp.adapters.ListUserAdapter
+import com.tafh.githubuserapp.data.remote.response.User
 import com.tafh.githubuserapp.databinding.FragmentHomeBinding
 import com.tafh.githubuserapp.viewmodel.HomeViewModel
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    companion object {
-        private const val TAG = "HomeFragment"
-    }
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     private val homeViewModel by viewModels<HomeViewModel>()
-
-    private lateinit var actionBar: ActionBar
 
     private lateinit var userAdapter: ListUserAdapter
 
@@ -94,7 +87,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-    private fun setUserRecyclerView(user: List<UserItem>) {
+    private fun setUserRecyclerView(user: List<User>) {
         binding.rvListUser.apply {
             if (requireContext().resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 layoutManager = GridLayoutManager(requireContext(), 2)
@@ -106,7 +99,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             adapter = userAdapter
 
             userAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: UserItem) {
+                override fun onItemClicked(data: User) {
                     val actionToDetailUser = HomeFragmentDirections.actionHomeFragmentToDetailUserFragment(
                         data.login
                     )

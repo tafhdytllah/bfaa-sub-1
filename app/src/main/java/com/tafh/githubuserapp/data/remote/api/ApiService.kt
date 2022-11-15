@@ -1,8 +1,6 @@
-package com.tafh.githubuserapp.api
+package com.tafh.githubuserapp.data.remote.api
 
-import com.tafh.githubuserapp.api.response.UserResponse
-import com.tafh.githubuserapp.api.response.ListUsersResponse
-import com.tafh.githubuserapp.api.response.UserRepositoriesResponse
+import com.tafh.githubuserapp.data.remote.response.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -35,7 +33,7 @@ interface ApiService {
     @Headers("Authorization: Bearer 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")
     fun getSearchUser(
         @Query("q") q: String
-    ): Call<ListUsersResponse>
+    ): Call<SearchUserResponse>
 
     @GET("users/{username}")
     @Headers("Authorization: Bearer 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")
@@ -53,13 +51,13 @@ interface ApiService {
     @Headers("Authorization: Bearer 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")
     fun getUserFollowers(
         @Path("username") username: String
-    ): Call<ListUsersResponse>
+    ): Call<UserFollowerResponse>
 
     @GET("users/{username}/following")
     @Headers("Authorization: Bearer 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")
     fun getUserFollowing(
         @Path("username") username: String
-    ): Call<ListUsersResponse>
+    ): Call<UserFollowingResponse>
 
 
     /**

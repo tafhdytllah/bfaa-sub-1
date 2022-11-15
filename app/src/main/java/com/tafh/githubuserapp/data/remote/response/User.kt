@@ -1,8 +1,8 @@
-package com.tafh.githubuserapp.data.model
+package com.tafh.githubuserapp.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class UserItem(
+data class User(
     @SerializedName("id")
     val id: String,
     @SerializedName("avatar_url")

@@ -1,0 +1,40 @@
+package com.tafh.githubuserapp.ui.fragment
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import com.tafh.githubuserapp.R
+import com.tafh.githubuserapp.adapters.DetailUserPagerAdapter.Companion.ARG_USERNAME_DETAIL
+import com.tafh.githubuserapp.databinding.FragmentFollowerBinding
+import com.tafh.githubuserapp.viewmodel.DetailUserViewModel
+
+class FollowingFragment : Fragment(R.layout.fragment_following) {
+
+    private var _binding: FragmentFollowerBinding? = null
+    private val binding get() = _binding!!
+
+    private val followingViewModel by viewModels<DetailUserViewModel>()
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentFollowerBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val username = arguments?.getString(ARG_USERNAME_DETAIL, "").toString()
+
+        followingViewModel.getUserFollowing(username)
+        followingViewModel.userFollowing.observe(viewLifecycleOwner) {
+            binding.tvText.text = it.toString()
+        }
+    }
+
+}

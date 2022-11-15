@@ -1,4 +1,4 @@
-package com.tafh.githubuserapp.api
+package com.tafh.githubuserapp.data.remote.api
 
 import androidx.viewbinding.BuildConfig
 import okhttp3.OkHttpClient

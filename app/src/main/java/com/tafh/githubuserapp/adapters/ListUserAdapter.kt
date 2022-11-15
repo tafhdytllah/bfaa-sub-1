@@ -1,4 +1,4 @@
-package com.tafh.githubuserapp.adapter
+package com.tafh.githubuserapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tafh.githubuserapp.R
-import com.tafh.githubuserapp.data.model.UserItem
+import com.tafh.githubuserapp.data.remote.response.User
 import com.tafh.githubuserapp.databinding.ItemRowUserBinding
 
-class ListUserAdapter(private val list: List<UserItem>) :
+class ListUserAdapter(private val list: List<User>) :
     RecyclerView.Adapter<ListUserAdapter.ListUserViewHolder>() {
 
     private var onItemClickCallback: OnItemClickCallback? = null
@@ -21,7 +21,7 @@ class ListUserAdapter(private val list: List<UserItem>) :
     inner class ListUserViewHolder(private val binding: ItemRowUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: UserItem) {
+        fun bind(item: User) {
 
             binding.apply {
                 Glide.with(binding.root.context)
@@ -58,7 +58,7 @@ class ListUserAdapter(private val list: List<UserItem>) :
     override fun getItemCount() = list.size
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: UserItem)
+        fun onItemClicked(data: User)
     }
 
 }

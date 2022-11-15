@@ -1,4 +1,4 @@
-package com.tafh.githubuserapp.view.activity
+package com.tafh.githubuserapp.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent

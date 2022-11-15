@@ -1,4 +1,4 @@
-package com.tafh.githubuserapp.view.fragment
+package com.tafh.githubuserapp.ui.fragment
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -17,21 +17,20 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tafh.githubuserapp.R
-import com.tafh.githubuserapp.adapter.SectionsPagerAdapter
+import com.tafh.githubuserapp.adapters.DetailUserPagerAdapter
 import com.tafh.githubuserapp.databinding.FragmentDetailUserBinding
 import com.tafh.githubuserapp.viewmodel.DetailUserViewModel
 
-private const val TAG = "DetailUserFragment"
 
 class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
 
+    private val TAG = "DetailUserFragment"
     private var _binding: FragmentDetailUserBinding? = null
     private val binding get() = _binding!!
 
     private val detailUserViewModel by viewModels<DetailUserViewModel>()
 
     companion object {
-        const val EXTRA_DATA = "extra_data"
         @StringRes
         private val TAB_TITLES = intArrayOf(R.string.tab_1, R.string.tab_2, R.string.tab_3)
     }
@@ -58,6 +57,7 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
         Log.d(TAG, "onViewCreated: $username")
         detailUserViewModel.getDetailUser(username)
 
+
         detailUserViewModel.userDetail.observe(viewLifecycleOwner) { user ->
             binding.apply {
                 toolbarDetail.title = user.login
@@ -77,6 +77,7 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
 
             }
         }
+
 
         binding.apply {
             btnFollowDetailUser.setOnCheckedChangeListener { _, isChecked ->
@@ -98,9 +99,10 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
             }
         }
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(activity as AppCompatActivity)
+        val detailUserPagerAdapter = DetailUserPagerAdapter(activity as AppCompatActivity, username)
+
         val viewPager: ViewPager2 = (activity as AppCompatActivity).findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
+        viewPager.adapter = detailUserPagerAdapter
 
         val tabs: TabLayout = (activity as AppCompatActivity).findViewById(R.id.tab_layout)
         TabLayoutMediator(tabs, viewPager) { tab, position ->
