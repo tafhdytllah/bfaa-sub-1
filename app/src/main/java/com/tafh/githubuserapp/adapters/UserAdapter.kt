@@ -9,8 +9,8 @@ import com.tafh.githubuserapp.R
 import com.tafh.githubuserapp.data.remote.response.User
 import com.tafh.githubuserapp.databinding.ItemRowUserBinding
 
-class ListUserAdapter(private val list: List<User>) :
-    RecyclerView.Adapter<ListUserAdapter.ListUserViewHolder>() {
+class UserAdapter(private val list: List<User>) :
+    RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     private var onItemClickCallback: OnItemClickCallback? = null
 
@@ -18,7 +18,7 @@ class ListUserAdapter(private val list: List<User>) :
         this.onItemClickCallback = onItemClickCallback
     }
 
-    inner class ListUserViewHolder(private val binding: ItemRowUserBinding) :
+    inner class UserViewHolder(private val binding: ItemRowUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: User) {
@@ -43,7 +43,7 @@ class ListUserAdapter(private val list: List<User>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ListUserViewHolder(
+        UserViewHolder(
             ItemRowUserBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -51,7 +51,7 @@ class ListUserAdapter(private val list: List<User>) :
             )
         )
 
-    override fun onBindViewHolder(holder: ListUserViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(list[position])
     }
 

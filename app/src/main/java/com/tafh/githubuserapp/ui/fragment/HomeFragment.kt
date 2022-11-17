@@ -13,7 +13,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tafh.githubuserapp.R
-import com.tafh.githubuserapp.adapters.ListUserAdapter
+import com.tafh.githubuserapp.adapters.UserAdapter
 import com.tafh.githubuserapp.data.remote.response.User
 import com.tafh.githubuserapp.databinding.FragmentHomeBinding
 import com.tafh.githubuserapp.viewmodel.HomeViewModel
@@ -26,7 +26,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val homeViewModel by viewModels<HomeViewModel>()
 
-    private lateinit var userAdapter: ListUserAdapter
+    private lateinit var userAdapter: UserAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -95,10 +95,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 layoutManager = LinearLayoutManager(requireContext())
             }
 
-            userAdapter = ListUserAdapter(user)
+            userAdapter = UserAdapter(user)
             adapter = userAdapter
 
-            userAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
+            userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: User) {
                     val actionToDetailUser = HomeFragmentDirections.actionHomeFragmentToDetailUserFragment(
                         data.login

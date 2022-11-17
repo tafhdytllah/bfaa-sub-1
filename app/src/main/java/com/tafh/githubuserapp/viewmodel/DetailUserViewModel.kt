@@ -19,14 +19,14 @@ class DetailUserViewModel : ViewModel() {
     private val _userDetail = MutableLiveData<UserResponse>()
     val userDetail: LiveData<UserResponse> = _userDetail
 
-    private val _userFollower = MutableLiveData<UserFollowerResponse>()
-    val userFollower: LiveData<UserFollowerResponse> = _userFollower
+    private val _userFollower = MutableLiveData<List<User>>()
+    val userFollower: LiveData<List<User>> = _userFollower
 
     private val _userRepo = MutableLiveData<List<Repository>>()
     val userRepo: LiveData<List<Repository>> = _userRepo
 
-    private val _userFollowing = MutableLiveData<UserFollowingResponse>()
-    val userFollowing: LiveData<UserFollowingResponse> = _userFollowing
+    private val _userFollowing = MutableLiveData<List<User>>()
+    val userFollowing: LiveData<List<User>> = _userFollowing
 
     private val apiService = RetrofitConfig.getApiService()
 
@@ -41,7 +41,7 @@ class DetailUserViewModel : ViewModel() {
                 if (!response.isSuccessful) {
                     Log.e(TAG, "onFailure: ${response.body()} tidak sukses")
                 } else {
-//                    Log.e(TAG, "onResponse: ${response.body()}" )
+                    Log.e(TAG, "onResponse Following : ${response.body()}" )
                     _userFollowing.value = response.body()
                 }
             }
