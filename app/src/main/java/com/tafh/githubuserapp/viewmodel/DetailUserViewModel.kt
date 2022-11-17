@@ -5,10 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tafh.githubuserapp.data.remote.api.RetrofitConfig
-import com.tafh.githubuserapp.data.remote.response.UserFollowerResponse
-import com.tafh.githubuserapp.data.remote.response.UserFollowingResponse
-import com.tafh.githubuserapp.data.remote.response.UserRepositoriesResponse
-import com.tafh.githubuserapp.data.remote.response.UserResponse
+import com.tafh.githubuserapp.data.remote.response.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,8 +22,8 @@ class DetailUserViewModel : ViewModel() {
     private val _userFollower = MutableLiveData<UserFollowerResponse>()
     val userFollower: LiveData<UserFollowerResponse> = _userFollower
 
-    private val _userRepo = MutableLiveData<UserRepositoriesResponse>()
-    val userRepo: LiveData<UserRepositoriesResponse> = _userRepo
+    private val _userRepo = MutableLiveData<List<Repository>>()
+    val userRepo: LiveData<List<Repository>> = _userRepo
 
     private val _userFollowing = MutableLiveData<UserFollowingResponse>()
     val userFollowing: LiveData<UserFollowingResponse> = _userFollowing

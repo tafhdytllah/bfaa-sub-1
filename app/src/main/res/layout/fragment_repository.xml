@@ -6,17 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.RepositoryFragment">
 
-    <TextView
-        android:id="@+id/tv_repo"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_repo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="text repo"
-        android:gravity="center"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="20"
+        tools:listitem="@layout/item_row_repository" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
