@@ -3,7 +3,6 @@ package com.tafh.githubuserapp.data.remote.response
 import com.google.gson.annotations.SerializedName
 
 data class UserResponse(
-
     @SerializedName("login")
     val login: String,
     @SerializedName("avatar_url")

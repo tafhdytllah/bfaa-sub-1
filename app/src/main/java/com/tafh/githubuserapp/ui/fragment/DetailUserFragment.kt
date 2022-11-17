@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -27,7 +26,6 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
     private val TAG = "DetailUserFragment"
     private var _binding: FragmentDetailUserBinding? = null
     private val binding get() = _binding!!
-
     private val detailUserViewModel by viewModels<DetailUserViewModel>()
 
     companion object {
@@ -47,20 +45,26 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toolbarDetail.apply {
+        detailUserViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+
+        detailUserViewModel.isEmpty.observe(viewLifecycleOwner) {
+            showEmptyData(it)
+        }
+
+        binding.toolbarDetailUser.apply {
             setNavigationOnClickListener {
                 it.findNavController().navigateUp()
             }
         }
 
         val username = DetailUserFragmentArgs.fromBundle(arguments as Bundle).usernameDetail
-        Log.d(TAG, "onViewCreated: $username")
         detailUserViewModel.getDetailUser(username)
-
 
         detailUserViewModel.userDetail.observe(viewLifecycleOwner) { user ->
             binding.apply {
-                toolbarDetail.title = user.login
+                toolbarDetailUser.title = user.login
 
                 Glide.with(requireContext())
                     .load(user.avatarUrl)
@@ -112,6 +116,26 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
         this.setHasOptionsMenu(true)
     }
 
+    private fun showEmptyData(isEmpty: Boolean) {
+        binding.apply {
+            if (isEmpty) {
+                tvNofoundDetailUser.visibility = View.VISIBLE
+            } else {
+                tvNofoundDetailUser.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            if (isLoading) {
+                progressBarDetailUser.visibility = View.VISIBLE
+            } else {
+                progressBarDetailUser.visibility = View.GONE
+            }
+        }
+    }
+
     private fun shareIntent() {
         try {
             val sendIntent = Intent().apply {
@@ -132,6 +156,7 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         inflater.inflate(R.menu.menu_main, menu)
@@ -139,6 +164,7 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_share -> {
@@ -155,7 +181,6 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
         super.onDestroyView()
         _binding = null
     }
-
 
 }
 

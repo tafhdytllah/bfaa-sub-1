@@ -1,12 +1,10 @@
 package com.tafh.githubuserapp.ui.fragment
 
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.text.Layout
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tafh.githubuserapp.R
@@ -37,6 +35,14 @@ class FollowerFragment : Fragment(R.layout.fragment_follower) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        followerViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+
+        followerViewModel.isEmpty.observe(viewLifecycleOwner) {
+            showEmptyData(it)
+        }
+
         val username = arguments?.getString(ARG_USERNAME_DETAIL, "").toString()
         followerViewModel.getUserFollower(username)
 
@@ -52,6 +58,34 @@ class FollowerFragment : Fragment(R.layout.fragment_follower) {
             userAdapter = UserAdapter(listUser)
             adapter = userAdapter
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            if (isLoading) {
+                progressBarFollower.visibility = View.VISIBLE
+                tvEmptyFollower.visibility = View.GONE
+            } else {
+                progressBarFollower.visibility = View.GONE
+                rvListUserFollower.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun showEmptyData(isEmpty: Boolean) {
+        binding.apply {
+            if (isEmpty) {
+                tvEmptyFollower.visibility = View.VISIBLE
+                rvListUserFollower.visibility = View.GONE
+            } else {
+                tvEmptyFollower.visibility = View.GONE
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

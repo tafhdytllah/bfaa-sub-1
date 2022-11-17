@@ -20,9 +20,7 @@ class UserAdapter(private val list: List<User>) :
 
     inner class UserViewHolder(private val binding: ItemRowUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(item: User) {
-
             binding.apply {
                 Glide.with(binding.root.context)
                     .load(item.avatarUrl)
@@ -37,7 +35,6 @@ class UserAdapter(private val list: List<User>) :
                 root.setOnClickListener {
                     onItemClickCallback?.onItemClicked(item)
                 }
-
             }
         }
     }

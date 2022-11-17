@@ -9,10 +9,8 @@ import com.tafh.githubuserapp.databinding.ItemRowRepositoryBinding
 class RepoAdapter(private val list: List<Repository>) :
     RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
 
-
     inner class RepoViewHolder(private val binding: ItemRowRepositoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(item: Repository) {
             binding.apply {
                 tvNameItemRepository.text = item.name.toString()
@@ -20,8 +18,6 @@ class RepoAdapter(private val list: List<Repository>) :
                 tvLanguageItemRepository.text = item.language
                 tvUpdateAtItemRepository.text = item.updateAt
             }
-
-
         }
     }
 

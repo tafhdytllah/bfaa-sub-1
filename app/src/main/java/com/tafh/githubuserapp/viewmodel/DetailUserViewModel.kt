@@ -1,6 +1,5 @@
 package com.tafh.githubuserapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,10 +10,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DetailUserViewModel : ViewModel() {
-
-    companion object {
-        private const val TAG = "DetailUserViewModel"
-    }
 
     private val _userDetail = MutableLiveData<UserResponse>()
     val userDetail: LiveData<UserResponse> = _userDetail
@@ -28,77 +23,21 @@ class DetailUserViewModel : ViewModel() {
     private val _userFollowing = MutableLiveData<List<User>>()
     val userFollowing: LiveData<List<User>> = _userFollowing
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _isEmpty = MutableLiveData<Boolean>()
+    val isEmpty: LiveData<Boolean> = _isEmpty
+
     private val apiService = RetrofitConfig.getApiService()
 
-    fun getUserFollowing(username: String) {
-        val apiClient = apiService.getUserFollowing(username)
-
-        apiClient.enqueue(object : Callback<UserFollowingResponse> {
-            override fun onResponse(
-                call: Call<UserFollowingResponse>,
-                response: Response<UserFollowingResponse>
-            ) {
-                if (!response.isSuccessful) {
-                    Log.e(TAG, "onFailure: ${response.body()} tidak sukses")
-                } else {
-                    Log.e(TAG, "onResponse Following : ${response.body()}" )
-                    _userFollowing.value = response.body()
-                }
-            }
-
-            override fun onFailure(call: Call<UserFollowingResponse>, t: Throwable) {
-                Log.e(TAG, "onFailure: ${t.message.toString()} gagal")
-            }
-
-        })
-    }
-
-    fun getUserRepo(username: String) {
-        val apiClient = apiService.getUserRepositories(username)
-
-        apiClient.enqueue(object : Callback<UserRepositoriesResponse> {
-            override fun onResponse(
-                call: Call<UserRepositoriesResponse>,
-                response: Response<UserRepositoriesResponse>
-            ) {
-                if (!response.isSuccessful) {
-                    Log.e(TAG, "onFailure: ${response.body()} tidak sukses")
-                } else {
-                    _userRepo.value = response.body()
-                }
-            }
-
-            override fun onFailure(call: Call<UserRepositoriesResponse>, t: Throwable) {
-                Log.e(TAG, "onFailure: ${t.message.toString()} gagal")
-            }
-
-        })
-    }
-
-    fun getUserFollower(username: String) {
-        val apiClient = apiService.getUserFollowers(username)
-
-        apiClient.enqueue(object : Callback<UserFollowerResponse> {
-            override fun onResponse(
-                call: Call<UserFollowerResponse>,
-                response: Response<UserFollowerResponse>
-            ) {
-                if (!response.isSuccessful) {
-                    Log.e(TAG, "onFailure: ${response.body()} tidak sukses")
-                } else {
-//                    Log.e(TAG, "onResponse: ${response.body()}" )
-                    _userFollower.value = response.body()
-                }
-            }
-
-            override fun onFailure(call: Call<UserFollowerResponse>, t: Throwable) {
-                Log.e(TAG, "onFailure: ${t.message.toString()} gagal")
-            }
-
-        })
+    companion object {
+        private const val TAG = "DetailUserViewModel"
     }
 
     fun getDetailUser(username: String) {
+        _isLoading.value = true
+        _isEmpty.value = false
         val apiService = RetrofitConfig.getApiService()
         val client = apiService.getDetailUser(username)
 
@@ -107,23 +46,114 @@ class DetailUserViewModel : ViewModel() {
                 call: Call<UserResponse>,
                 response: Response<UserResponse>
             ) {
+                _isLoading.value = false
                 if (!response.isSuccessful) {
-                    Log.d(TAG, "getDetailUser not found : ${response.message()} ")
+                    _isEmpty.value = true
                 } else {
-                    Log.d(TAG, "getDetailUser success : ${response.body()}")
-
                     val data = response.body()!!
                     _userDetail.value = data
-
                 }
             }
 
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                Log.d(TAG, "getDetailUser onFailure : ${t.message} ")
+                _isLoading.value = false
+                _isEmpty.value = true
             }
 
         })
 
-
     }
+
+    fun getUserFollowing(username: String) {
+        _isLoading.value = true
+        _isEmpty.value = false
+        val apiClient = apiService.getUserFollowing(username)
+
+        apiClient.enqueue(object : Callback<UserFollowingResponse> {
+            override fun onResponse(
+                call: Call<UserFollowingResponse>,
+                response: Response<UserFollowingResponse>
+            ) {
+                _isLoading.value = false
+                if (!response.isSuccessful) {
+                    _isEmpty.value = true
+                } else {
+                    val following = response.body()!!
+                    if (following.size > 0) {
+                        _userFollowing.value = following
+                    } else {
+                        _isEmpty.value = true
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<UserFollowingResponse>, t: Throwable) {
+                _isLoading.value = false
+                _isEmpty.value = true
+            }
+
+        })
+    }
+
+    fun getUserRepo(username: String) {
+        _isLoading.value = true
+        _isEmpty.value = false
+        val apiClient = apiService.getUserRepositories(username)
+
+        apiClient.enqueue(object : Callback<UserRepositoriesResponse> {
+            override fun onResponse(
+                call: Call<UserRepositoriesResponse>,
+                response: Response<UserRepositoriesResponse>
+            ) {
+                _isLoading.value = false
+                if (!response.isSuccessful) {
+                    _isEmpty.value = true
+                } else {
+                    val repo = response.body()!!
+                    if (repo.size > 0) {
+                        _userRepo.value = repo
+                    } else {
+                        _isEmpty.value = true
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<UserRepositoriesResponse>, t: Throwable) {
+                _isLoading.value = false
+                _isEmpty.value = true
+            }
+
+        })
+    }
+
+    fun getUserFollower(username: String) {
+        _isLoading.value = true
+        _isEmpty.value = false
+        val apiClient = apiService.getUserFollowers(username)
+
+        apiClient.enqueue(object : Callback<UserFollowerResponse> {
+            override fun onResponse(
+                call: Call<UserFollowerResponse>,
+                response: Response<UserFollowerResponse>
+            ) {
+                _isLoading.value = false
+                if (!response.isSuccessful) {
+                    _isEmpty.value = true
+                } else {
+                    val follower = response.body()!!
+                    if (follower.size > 0) {
+                        _userFollower.value = follower
+                    } else {
+                        _isEmpty.value = true
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<UserFollowerResponse>, t: Throwable) {
+                _isLoading.value = false
+                _isEmpty.value = true
+            }
+        })
+    }
+
 }

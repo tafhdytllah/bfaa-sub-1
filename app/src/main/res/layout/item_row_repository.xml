@@ -9,16 +9,13 @@
     android:layout_marginBottom="28dp"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
-
-
     android:background="@drawable/bg_card_item">
-
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_name_item_repository"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="bfa-github-user"
+        tools:text="bfa-github-user"
         android:textColor="#0969da"
         android:textStyle="bold"
         android:fontFamily="@font/nunito_sans"
@@ -36,20 +33,21 @@
         android:paddingTop="2dp"
         android:paddingEnd="12dp"
         android:paddingBottom="2dp"
-        android:text="Public"
+        tools:text="Public"
         android:fontFamily="@font/nunito_sans"
         android:textColor="@color/black"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_name_item_repository"
         app:layout_constraintStart_toEndOf="@+id/tv_name_item_repository"
-        app:layout_constraintTop_toTopOf="@+id/tv_name_item_repository" />
+        app:layout_constraintTop_toTopOf="@+id/tv_name_item_repository"
+        tools:ignore="SmallSp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_language_item_repository"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Kotlin"
+        tools:text="Kotlin"
         android:fontFamily="@font/nunito_sans"
         android:textColor="@color/black"
         android:textSize="12sp"
@@ -63,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Update 20 days ago"
+        tools:text="Update 20 days ago"
         android:textColor="@color/black"
         android:textSize="12sp"
         android:fontFamily="@font/nunito_sans"
@@ -78,4 +76,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_language_item_repository"
         app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,6 +39,15 @@ class RepositoryFragment : Fragment(R.layout.fragment_repository) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        repositoryViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+
+        repositoryViewModel.isEmpty.observe(viewLifecycleOwner) {
+            showEmptyData(it)
+        }
+
+
         val username = arguments?.getString(ARG_USERNAME_DETAIL, "").toString()
         repositoryViewModel.getUserRepo(username)
 
@@ -49,14 +58,39 @@ class RepositoryFragment : Fragment(R.layout.fragment_repository) {
     }
 
     private fun setRepoRecyclerView(listRepo: List<Repository>) {
+        binding.rvListRepo.apply{
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            repoAdapter = RepoAdapter(listRepo)
+            adapter = repoAdapter
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
         binding.apply {
-            rvListRepo.apply{
-                setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context)
-                repoAdapter = RepoAdapter(listRepo)
-                adapter = repoAdapter
+            if (isLoading) {
+                progressBarRepository.visibility = View.VISIBLE
+                tvEmptyRepository.visibility = View.GONE
+            } else {
+                progressBarRepository.visibility = View.GONE
+                rvListRepo.visibility = View.VISIBLE
             }
         }
     }
 
+    private fun showEmptyData(isEmpty: Boolean) {
+        binding.apply {
+            if (isEmpty) {
+                tvEmptyRepository.visibility = View.VISIBLE
+                rvListRepo.visibility = View.GONE
+            } else {
+                tvEmptyRepository.visibility = View.GONE
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

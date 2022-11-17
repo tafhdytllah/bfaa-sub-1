@@ -8,7 +8,8 @@ import com.tafh.githubuserapp.ui.fragment.FollowerFragment
 import com.tafh.githubuserapp.ui.fragment.FollowingFragment
 import com.tafh.githubuserapp.ui.fragment.RepositoryFragment
 
-class DetailUserPagerAdapter(activity: AppCompatActivity, val username: String): FragmentStateAdapter(activity) {
+class DetailUserPagerAdapter(activity: AppCompatActivity, val username: String) :
+    FragmentStateAdapter(activity) {
 
     companion object {
         const val ARG_USERNAME_DETAIL = "username_detail"
@@ -18,15 +19,17 @@ class DetailUserPagerAdapter(activity: AppCompatActivity, val username: String):
 
     override fun createFragment(position: Int): Fragment {
         var fragment: Fragment? = null
-        var arg: String? = null
-        when(position) {
+
+        when (position) {
             0 -> fragment = RepositoryFragment()
             1 -> fragment = FollowerFragment()
             2 -> fragment = FollowingFragment()
         }
+
         fragment?.arguments = Bundle().apply {
             putString(ARG_USERNAME_DETAIL, username)
         }
+
         return fragment as Fragment
     }
 }
