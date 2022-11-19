@@ -20,7 +20,6 @@ import com.tafh.githubuserapp.adapters.DetailUserPagerAdapter
 import com.tafh.githubuserapp.databinding.FragmentDetailUserBinding
 import com.tafh.githubuserapp.viewmodel.DetailUserViewModel
 
-
 class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
 
     private val TAG = "DetailUserFragment"
@@ -45,26 +44,17 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.toolbar.setNavigationOnClickListener {
+            it.findNavController().navigateUp()
+        }
+
         detailUserViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
 
-        detailUserViewModel.isEmpty.observe(viewLifecycleOwner) {
-            showEmptyData(it)
-        }
-
-        binding.toolbarDetailUser.apply {
-            setNavigationOnClickListener {
-                it.findNavController().navigateUp()
-            }
-        }
-
-        val username = DetailUserFragmentArgs.fromBundle(arguments as Bundle).usernameDetail
-        detailUserViewModel.getDetailUser(username)
-
         detailUserViewModel.userDetail.observe(viewLifecycleOwner) { user ->
             binding.apply {
-                toolbarDetailUser.title = user.login
+                toolbar.title = user.login ?: ""
 
                 Glide.with(requireContext())
                     .load(user.avatarUrl)
@@ -73,15 +63,26 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
                     .into(ivAvatarDetailUser)
 
                 tvNameDetailUser.text = user.name ?: "-"
-                tvRepositoryDetailUser.text = user.repositories.toString()
-                tvFollowerDetailUser.text = user.followers.toString()
-                tvFollowingDetailUser.text = user.following.toString()
+                tvRepositoryDetailUser.text = (user.repositories ?: 0).toString()
+                tvFollowerDetailUser.text = (user.followers ?: 0).toString()
+                tvFollowingDetailUser.text = (user.following ?: 0).toString()
                 tvLocationDetailUser.text = user.location ?: "-"
                 tvCompanyDetailUser.text = user.company ?: "-"
 
             }
         }
 
+        val username = DetailUserFragmentArgs.fromBundle(arguments as Bundle).usernameDetail
+        subscribeData(username)
+
+        val detailUserPagerAdapter = DetailUserPagerAdapter(activity as AppCompatActivity, username)
+        val viewPager: ViewPager2 = (activity as AppCompatActivity).findViewById(R.id.view_pager)
+        viewPager.adapter = detailUserPagerAdapter
+
+        val tabs: TabLayout = (activity as AppCompatActivity).findViewById(R.id.tab_layout)
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
 
         binding.apply {
             btnFollowDetailUser.setOnCheckedChangeListener { _, isChecked ->
@@ -103,27 +104,11 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
             }
         }
 
-        val detailUserPagerAdapter = DetailUserPagerAdapter(activity as AppCompatActivity, username)
-
-        val viewPager: ViewPager2 = (activity as AppCompatActivity).findViewById(R.id.view_pager)
-        viewPager.adapter = detailUserPagerAdapter
-
-        val tabs: TabLayout = (activity as AppCompatActivity).findViewById(R.id.tab_layout)
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
-
         this.setHasOptionsMenu(true)
     }
 
-    private fun showEmptyData(isEmpty: Boolean) {
-        binding.apply {
-            if (isEmpty) {
-                tvNofoundDetailUser.visibility = View.VISIBLE
-            } else {
-                tvNofoundDetailUser.visibility = View.GONE
-            }
-        }
+    private fun subscribeData(username: String) {
+        detailUserViewModel.getDetailUser(username)
     }
 
     private fun showLoading(isLoading: Boolean) {

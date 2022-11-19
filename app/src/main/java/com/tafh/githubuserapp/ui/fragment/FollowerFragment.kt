@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,8 +22,6 @@ class FollowerFragment : Fragment(R.layout.fragment_follower) {
 
     private val followerViewModel by viewModels<DetailUserViewModel>()
 
-    private lateinit var userAdapter: UserAdapter
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +34,7 @@ class FollowerFragment : Fragment(R.layout.fragment_follower) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         followerViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
@@ -43,20 +43,37 @@ class FollowerFragment : Fragment(R.layout.fragment_follower) {
             showEmptyData(it)
         }
 
-        val username = arguments?.getString(ARG_USERNAME_DETAIL, "").toString()
-        followerViewModel.getUserFollower(username)
+        val layoutManager = LinearLayoutManager(context)
+        binding.rvListUserFollower.layoutManager = layoutManager
 
         followerViewModel.userFollower.observe(viewLifecycleOwner) { listUser ->
-            setUserRecyclerView(listUser)
+            setUserData(listUser)
         }
+
+        val username = arguments?.getString(ARG_USERNAME_DETAIL, "").toString()
+        subsscribeData(username)
+
     }
 
-    private fun setUserRecyclerView(listUser: List<User>) {
+    private fun subsscribeData(username: String) {
+        binding.rvListUserFollower.scrollToPosition(0)
+        followerViewModel.getUserFollower(username)
+    }
+
+    private fun setUserData(listUser: List<User>) {
         binding.rvListUserFollower.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            userAdapter = UserAdapter(listUser)
+            val userAdapter = UserAdapter(listUser)
             adapter = userAdapter
+
+            userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: User) {
+                    Toast.makeText(
+                        context,
+                        data.login,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
         }
     }
 

@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class UserResponse(
     @SerializedName("login")
-    val login: String,
+    val login: String?,
     @SerializedName("avatar_url")
     val avatarUrl: String,
     @SerializedName("public_repos")
-    val repositories: Int,
+    val repositories: Int?,
     @SerializedName("followers")
-    val followers: Int,
+    val followers: Int?,
     @SerializedName("following")
-    val following: Int,
+    val following: Int?,
     @SerializedName("company")
     val company: String?,
     @SerializedName("location")
