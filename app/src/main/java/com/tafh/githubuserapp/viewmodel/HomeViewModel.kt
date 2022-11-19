@@ -1,18 +1,19 @@
 package com.tafh.githubuserapp.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.*
-import com.tafh.githubuserapp.api.RetrofitConfig
-import com.tafh.githubuserapp.api.response.SearchUserResponse
-import com.tafh.githubuserapp.data.model.UserItem
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.tafh.githubuserapp.data.remote.api.RetrofitConfig
+import com.tafh.githubuserapp.data.remote.response.SearchUserResponse
+import com.tafh.githubuserapp.data.remote.response.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class HomeViewModel : ViewModel(){
 
-    private val _users = MutableLiveData<List<UserItem>>()
-    val users: LiveData<List<UserItem>> = _users
+    private val _users = MutableLiveData<List<User>>()
+    val users: LiveData<List<User>> = _users
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -37,12 +38,11 @@ class HomeViewModel : ViewModel(){
             ) {
                 _isLoading.value = false
                 if (!response.isSuccessful) {
-                    Log.e(TAG, "onFailure: ${response.message()} tidak sukses")
+                    _isEmpty.value = true
                 } else {
-                    var data = response.body()!!.items
+                    val data = response.body()!!.items
                     if (data.size.equals(0)) {
                         _isEmpty.value = true
-                        Log.e(TAG, "data kosong")
                     } else {
                         _users.value = data
                     }
@@ -52,14 +52,8 @@ class HomeViewModel : ViewModel(){
             override fun onFailure(call: Call<SearchUserResponse>, t: Throwable) {
                 _isLoading.value = false
                 _isEmpty.value = true
-                Log.e(TAG, "onFailure: ${t.message.toString()} gagal")
             }
-
         })
-
     }
-
-
-
 
 }

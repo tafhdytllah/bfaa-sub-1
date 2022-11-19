@@ -47,6 +47,16 @@
 
         <item name="android:textColorHint">@color/grey_light</item>
     </style>
+
+    <style name="TextContent.Toolbar.TitleTextExpan" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextContent.Toolbar.TitleTextCollapse" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
     
     <style name="ProgressBarBlue" parent="Theme.AppCompat">
         <item name="colorAccent">#39A7FF</item>

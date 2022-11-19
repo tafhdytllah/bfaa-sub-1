@@ -1,4 +1,4 @@
-package com.tafh.githubuserapp.adapter
+package com.tafh.githubuserapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tafh.githubuserapp.R
-import com.tafh.githubuserapp.data.model.UserItem
+import com.tafh.githubuserapp.data.remote.response.User
 import com.tafh.githubuserapp.databinding.ItemRowUserBinding
 
-class ListUserAdapter(private val list: List<UserItem>) :
-    RecyclerView.Adapter<ListUserAdapter.ListUserViewHolder>() {
+class UserAdapter(private val list: List<User>) :
+    RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     private var onItemClickCallback: OnItemClickCallback? = null
 
@@ -18,11 +18,9 @@ class ListUserAdapter(private val list: List<UserItem>) :
         this.onItemClickCallback = onItemClickCallback
     }
 
-    inner class ListUserViewHolder(private val binding: ItemRowUserBinding) :
+    inner class UserViewHolder(private val binding: ItemRowUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(item: UserItem) {
-
+        fun bind(item: User) {
             binding.apply {
                 Glide.with(binding.root.context)
                     .load(item.avatarUrl)
@@ -37,13 +35,12 @@ class ListUserAdapter(private val list: List<UserItem>) :
                 root.setOnClickListener {
                     onItemClickCallback?.onItemClicked(item)
                 }
-
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ListUserViewHolder(
+        UserViewHolder(
             ItemRowUserBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -51,14 +48,14 @@ class ListUserAdapter(private val list: List<UserItem>) :
             )
         )
 
-    override fun onBindViewHolder(holder: ListUserViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(list[position])
     }
 
     override fun getItemCount() = list.size
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: UserItem)
+        fun onItemClicked(data: User)
     }
 
 }
